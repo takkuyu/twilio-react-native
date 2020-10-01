@@ -10,6 +10,11 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.facebook.react.shell.MainReactPackage;
+import com.twiliorn.library.TwilioPackage;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -22,11 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+          return Arrays.<ReactPackage>asList(
+              new MainReactPackage(),
+              new TwilioPackage()
+          );
         }
 
         @Override

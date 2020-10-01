@@ -6,8 +6,13 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import {
+  TwilioVideoLocalView,
+  TwilioVideoParticipantView,
+  TwilioVideo
+} from "react-native-twilio-video-webrtc";
 
-const Participant = ({ participant }) => {
+const Participant = ({ participant, token }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
 
@@ -17,6 +22,8 @@ const Participant = ({ participant }) => {
   const trackpubsToTracks = trackMap => Array.from(trackMap.values())
     .map(publication => publication.track)
     .filter(track => track !== null);
+
+    
 
   // set the video and audio tracks in the state and set up listeners to the participant object for when tracks are added or removed.
   useEffect(() => {
@@ -55,6 +62,7 @@ const Participant = ({ participant }) => {
   useEffect(() => {
     const videoTrack = videoTracks[0];
     if (videoTrack) {
+      console.log(videoTrack)
       videoTrack.attach(videoRef.current);
       return () => {
         videoTrack.detach();
@@ -62,12 +70,23 @@ const Participant = ({ participant }) => {
     }
   }, [videoTracks]);
 
+  // useEffect(() => {
+  //   try {
+  //     videoRef.connect({
+  //       roomName:'Test Room',
+  //       accessToken: token
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   return (
     <View className="participant">
       <Text>{participant.identity}</Text>
-      <video ref={videoRef} autoPlay={true} />
-      <audio ref={audioRef} autoPlay={true} muted={true} />
+      {/* <video ref={videoRef} autoPlay={true} /> */}
+      {/* <TwilioVideo ref={videoRef} /> */}
+      {/* <audio ref={audioRef} autoPlay={true} muted={true} /> */}
     </View>
   );
 };

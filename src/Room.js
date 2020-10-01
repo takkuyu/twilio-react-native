@@ -19,22 +19,22 @@ const Room = ({ roomName, token, handleLogout }) => {
 
   // This uses the token and roomName to connect to the Twilio Video service.
   useEffect(() => {
-    const participantConnected = participant => {
-      setParticipants(prevParticipants => [...prevParticipants, participant]);
-    };
-    const participantDisconnected = participant => {
-      setParticipants(prevParticipants =>
-        prevParticipants.filter(p => p !== participant)
-      );
-    };
-    Video.connect(token, {
-      name: roomName
-    }).then(room => {
-      setRoom(room);
-      room.on('participantConnected', participantConnected);
-      room.on('participantDisconnected', participantDisconnected);
-      room.participants.forEach(participantConnected);
-    });
+    // const participantConnected = participant => {
+    //   setParticipants(prevParticipants => [...prevParticipants, participant]);
+    // };
+    // const participantDisconnected = participant => {
+    //   setParticipants(prevParticipants =>
+    //     prevParticipants.filter(p => p !== participant)
+    //   );
+    // };
+    // Video.connect(token, {
+    //   name: roomName
+    // }).then(room => {
+    //   setRoom(room);
+    //   room.on('participantConnected', participantConnected);
+    //   room.on('participantDisconnected', participantDisconnected);
+    //   room.participants.forEach(participantConnected);
+    // });
 
     // stops all the local partipant's tracks and then disconnects from the room, if the local participant is connected:
     return () => {
@@ -60,11 +60,12 @@ const Room = ({ roomName, token, handleLogout }) => {
         title="Log out"
       />
       <View className="local-participant">
-        {room && (
+        {/* {room && (
           <Participant
             key={room.localParticipant.sid}
+            // token={token}
             participant={room.localParticipant}
-          />) }
+          />) } */}
       </View>
       <Text>Remote Participants</Text>
       <View className="remote-participants">{remoteParticipants}</View>

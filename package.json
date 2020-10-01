@@ -16,6 +16,7 @@
     "events": "^3.2.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-twilio-video-webrtc": "git+https://github.com/blackuy/react-native-twilio-video-webrtc.git",
     "twilio-video": "^2.7.2",
     "util": "^0.12.3"
   },
